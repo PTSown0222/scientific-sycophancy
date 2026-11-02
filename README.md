@@ -29,6 +29,7 @@ scientific-sycophancy/
 │   ├── sbert.csv
 │   ├── deberta.csv
 │   └── deberta_weighted.csv
+├── GUIDELINES.docx                task guidelines: data format, submission and evaluation
 ├── requirements.txt               Python packages for the baselines
 ├── LICENSE                        CC BY 4.0
 └── README.md
