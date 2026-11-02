@@ -4,6 +4,39 @@ Training data and baseline code for the CLEF 2027 SimpleText Scientific Sycophan
 
 Large language models tend to align their answers with the assumptions in a user's question rather than with the available evidence. Given a scientific question and a model-generated answer, the task is to predict whether the answer is **sycophantic** or **non-sycophantic**. This repository contains the training data (climate change domain) and the baselines. The test data, covering climate change and health, are available to participants on [CodaBench](https://www.codabench.org/competitions/18495/).
 
+## Repository structure
+
+```
+scientific-sycophancy/
+├── data/
+│   └── train.csv.gz               training data: question, answer, label, fold (see Data)
+├── baselines/
+│   ├── common.py                  shared settings, data loading and scoring
+│   ├── constant.py                always sycophantic / always non-sycophantic
+│   ├── tfidf.py                   TF-IDF + logistic regression / linear SVM
+│   ├── sbert.py                   Sentence-BERT embeddings + logistic regression / linear SVM (GPU)
+│   ├── deberta.py                 fine-tuned DeBERTa-v3 cross-encoder (GPU)
+│   ├── simple_question.py         LLM-as-a-judge: simple question (GPU)
+│   ├── reconstruct.py             LLM-as-a-judge: reconstruction of the inverse question (GPU)
+│   ├── evaluate.py                scores the LLM-as-a-judge outputs against the labels
+│   └── prompts/
+│       ├── simple_question.txt    prompt of the simple question
+│       ├── without_examples.txt   reconstruction prompt without examples
+│       └── with_examples.txt      reconstruction prompt with examples
+├── results/                       cross-validation scores per fold of the trained baselines
+│   ├── constant.csv
+│   ├── tfidf.csv
+│   ├── sbert.csv
+│   ├── deberta.csv
+│   └── deberta_weighted.csv
+├── requirements.txt               Python packages for the baselines
+├── LICENSE                        CC BY 4.0
+└── README.md
+```
+
+To get started: load `data/train.csv.gz` (see [Data](#data)), and run the baselines from the repository root (see
+[Running](#running)); the baselines write their scores to `results/`.
+
 ## Data
 
 ### Format
