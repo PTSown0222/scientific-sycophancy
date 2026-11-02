@@ -129,3 +129,7 @@ python -m baselines.evaluate data/train.csv.gz
 ```
 
 Run the commands from the repository root.
+
+## Licence
+
+The data, code and documentation in this repository are licensed under [CC BY 4.0](LICENSE).
